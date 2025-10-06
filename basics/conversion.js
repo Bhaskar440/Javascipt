@@ -11,3 +11,11 @@ var f = 5
 var p = String(f)
 console.log(typeof p);
 //yaha type of me string hai value me 5 which is a number
+console.log("4"+ 4+ 4);
+//yaha shuru me string hai to 444 dedia 
+console.log(4+4+"4");
+//yaha 84 aagya 
+console.log(4+"4"+4);
+//yaha 444 aagya 
+console.log(true)
+console.log("2">10);
