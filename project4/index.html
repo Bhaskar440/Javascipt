@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+    <p>Try and guess a random number between 1 and 100</p>
+    <p>You have 10 attempts to guess the number</p>
+    <h1>Guess number</h1>
+    </br>
+    <form class="form">
+        <label2 for="guessField" id="guess">Guess a number</label2>
+        <input type="text" id="guessField" class="guessField">
+        <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
+    </form>
+    <div class="resultParas">
+        <p>Previous Guesses:<span class="guesses"></span></p>
+        <p>Guesses remaining:<span class="lastResult">10</span></p>
+        <p class="lowOrHi"></p>
+    </div>
+    </div>
+</body>
+<script>
+    const randomNumber = parseInt(Math.random() * 100 + 1);
+    const guessField = document.getElementById('guessField');
+    const guesses = document.querySelector('.guesses');
+    const lastResult = document.querySelector('.lastResult');
+    const lowOrHi = document.querySelector('.lowOrHi');
+    const form = document.querySelector('.form');
+
+    let attempts = 10;
+    let prevGuesses = [];
+
+    form.addEventListener('submit', function(e) 
+    {
+    e.preventDefault();
+    const userGuess = parseInt(guessField.value);
+    if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) 
+    {
+        lowOrHi.textContent = 'Please enter a valid number between 1 and 100.';
+        return;
+    }
+    prevGuesses.push(userGuess);
+    guesses.textContent = prevGuesses.join(', ');
+    attempts--;
+    lastResult.textContent = attempts;
+    if (userGuess === randomNumber) 
+    {
+        lowOrHi.textContent = 'Congratulations! You guessed the number!';
+        form.reset();
+        // Optionally, disable further guessing
+    }
+    else if (attempts === 0) 
+    {
+        lowOrHi.textContent = `Game over! The number was ${randomNumber}.`;
+        form.reset();
+    }
+    else if (userGuess > randomNumber) 
+    {
+        lowOrHi.textContent = 'Too high!';
+    }
+    else
+    {
+        lowOrHi.textContent = 'Too low!';
+    }
+    guessField.value = '';
+});
+
+</script>
+</html>
